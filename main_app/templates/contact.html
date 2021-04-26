@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <form method="post" action="{{ url_for('contact') }}">
+            <fieldset class="form-group">
+                {{ form.name.label }}
+                {{ form.name(size=20) }}
+            </fieldset>
+
+            <fieldset class="form-group">
+                {{ form.email.label }}
+                {{ form.email }}
+            </fieldset>
+
+            <fieldset class="form-group">
+                {{ form.body.label }}
+                {{ form.body }}
+            </fieldset>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        {% if form.name.errors %}
+            {% for error in form.name.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% elif form.email.errors %}
+            {% for error in form.email.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% elif form.body.errors %}
+            {% for error in form.body.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+{% endblock %}
