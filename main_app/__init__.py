@@ -1,25 +1,16 @@
-from flask import Flask, render_template, url_for, redirect
-from main_app.forms import ContactForm
-
-app = Flask(__name__)
+"""Initialize app."""
+from flask import Flask
 
 
-@app.route('/')
-def hello_world():
-    return render_template('index.html', title="Hello world!")
+def create_app():
+    """Construct the core flask_wtforms_tutorial."""
+    app = Flask(__name__, instance_relative_config=False)
+    app.config.from_object("config.Config")
+    app.config["RECAPTCHA_PUBLIC_KEY"] = "iubhiukfgjbkhfvgkdfm"
+    app.config["RECAPTCHA_PARAMETERS"] = {"size": "100%"}
 
+    with app.app_context():
+        # Import parts of our flask_wtforms_tutorial
+        from . import routes
 
-@app.route('/contact', methods=["GET", "POST"])
-def contact():
-    """Standard `contact` form."""
-    form = ContactForm()
-    if form.validate_on_submit():
-        return redirect(url_for("success"))
-    return render_template(
-        "contact.html",
-        form=form
-    )
-
-
-if __name__ == '__main__':
-    app.run()
+        return app
