@@ -1,6 +1,11 @@
 """Initialize app."""
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_redis import FlaskRedis
 
+# Globally accessible libraries
+db = SQLAlchemy()
+r = FlaskRedis()
 
 def create_app():
     """Construct the core flask_wtforms_tutorial."""
@@ -9,8 +14,16 @@ def create_app():
     app.config["RECAPTCHA_PUBLIC_KEY"] = "iubhiukfgjbkhfvgkdfm"
     app.config["RECAPTCHA_PARAMETERS"] = {"size": "100%"}
 
+    # Initialize Plugins
+    db.init_app(app)
+    r.init_app(app)
+
     with app.app_context():
         # Import parts of our flask_wtforms_tutorial
         from . import routes
+
+        # Register Blueprints
+        app.register_blueprint(auth.auth_bp)
+        app.register_blueprint(admin.admin_bp)
 
         return app
