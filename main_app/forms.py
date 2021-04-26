@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import (StringField, TextAreaField, PasswordField, DateField, SelectField, validators)
+from wtforms import (StringField, TextAreaField, PasswordField, DateField, SelectField, SubmitField, validators)
 from wtforms.fields.html5 import EmailField
 
 
@@ -42,6 +42,8 @@ class SignupForm(FlaskForm):
     )
     birthday = DateField('Your Birthday')
     recaptcha = RecaptchaField()
+    submit = SubmitField('Submit')
+
 
 class ContactForm(FlaskForm):
     """Contact form."""
@@ -63,3 +65,4 @@ class ContactForm(FlaskForm):
             validators.Length(min=4, message=('Your message is too short.'))
         ]
     )
+    submit = SubmitField('Submit')
