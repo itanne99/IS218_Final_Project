@@ -2,10 +2,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_redis import FlaskRedis
+from ddtrace import patch_all
 
 # Globally accessible libraries
 db = SQLAlchemy()
 r = FlaskRedis()
+patch_all()
 
 def create_app():
     """Construct the core flask_wtforms_tutorial."""
@@ -25,5 +27,7 @@ def create_app():
         # Register Blueprints
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(admin.admin_bp)
+
+        db.create_all()  # Create database tables for our data models
 
         return app
