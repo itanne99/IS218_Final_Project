@@ -10,7 +10,7 @@ class Config:
     FLASK_ENV = environ.get("FLASK_ENV")
 
     # Database
-    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://xuvwzq6wygw6t2gv:znabbsq170mffx5r@pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/hprxc6b8d6lbq5gf"
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
