@@ -31,3 +31,8 @@ def signup():
         form=form,
         time="Sign-up Form"
     )
+
+
+@app.route('/success')
+def success():
+    return render_template('success.html', title="success")
